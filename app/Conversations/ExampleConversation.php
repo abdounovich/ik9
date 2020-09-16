@@ -84,7 +84,7 @@ class ExampleConversation extends Conversation
 public function AskTime($shift){
 
 $this->debut="00:00";
-$this->fin="00:05";
+$this->fin="00:10";
 $this->jour="";
 /* return view('test'); */
 $pas=60*1;
@@ -103,6 +103,8 @@ $arr3=array();
 
 $time_now = date("Y-m-d H:i:s");
 
+$this->bot->reply($time_now);
+$this->bot->reply($this->debut);
 
 while ($this->debut < $this->fin) {
 
@@ -110,11 +112,9 @@ while ($this->debut < $this->fin) {
     if($shift=="0"){
 
 if ($this->debut>$time_now) {
-    $this->bot->reply('h1 ');
 
 }
 else {
-    $this->bot->reply('h2');
 
     $arr[]=$this->debut;
 $this->debut=date("Y-m-d H:i:s", (strtotime(date($this->debut)) + $pas));
