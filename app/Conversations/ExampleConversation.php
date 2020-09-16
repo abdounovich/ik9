@@ -120,14 +120,20 @@ $this->debut=date("Y-m-d H:i:s", (strtotime(date($this->debut)) + $pas));
 }
 
 
+   if ($shift=="0") {
    
 foreach ($arr as $key ) {
     if($key>$time_now){
 $arr3[]=$key;}
-else
-$arr[]="";
+    }}
+    else{
+        foreach ($arr as $key ) {
+           
+        $arr3[]=$key;}
+            
 
-}
+    }
+
 foreach ($arr3 as $key ) {
     $this->bot->reply($key);
 }
@@ -135,7 +141,6 @@ return;
   
 
    
-
 
 
 
