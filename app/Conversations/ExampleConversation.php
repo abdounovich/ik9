@@ -83,8 +83,8 @@ class ExampleConversation extends Conversation
     }
 public function AskTime($shift){
 
-$this->debut="00:13";
-$this->fin="00:30";
+$this->debut="00:18";
+$this->fin="00:22";
 $this->jour="";
 /* return view('test'); */
 $pas=60*1;
