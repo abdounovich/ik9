@@ -57,20 +57,18 @@ class ExampleConversation extends Conversation
             $selectedValue = $answer->getValue();
             if($selectedValue == 'D0') {
                 $this->day=$this->today;
-             
-                
-            $this->AskTime();
+                 $this->AskTime(0);
            
             }
                 elseif($selectedValue == 'D1') {  
                     $this->day=date('Y-m-d', strtotime($this->today. ' + 1 day'));
                    
-                    $this->AskTime();
+                    $this->AskTime(1);
 
                 }
                 else {  $this->day=date('Y-m-d', strtotime($this->today. ' + 2 day'));
                   
-                    $this->AskTime();
+                    $this->AskTime(2);
 
                 } 
 
@@ -83,20 +81,19 @@ class ExampleConversation extends Conversation
 
 
     }
-public function AskTime(){
+public function AskTime($shift){
 
-$this->debut="19:00";
-$this->fin="23:00";
+$this->debut="23:22";
+$this->fin="23:25";
 $this->jour="";
 /* return view('test'); */
-$pas=60*30;
+$pas=60*1;
 $arr=array();
 
 
 
 $this->debut=date("Y-m-d ").$this->debut.":00";
 $this->debut=date("Y-m-d H:i:s", strtotime(date($this->debut)));
-
 $this->fin=date("Y-m-d ").$this->fin.":00";
 $this->fin=date("Y-m-d H:i:s", strtotime(date($this->fin)));
 $arr2=array();
@@ -106,21 +103,21 @@ $arr3=array();
 
 $time_now = date("Y-m-d H:i:s");
 
+
 while ($this->debut < $this->fin) {
-    
-  
-   
+
+
+    if($shift="0"){
+if ($this->debut<$time_now) {
+}
+else {
     $arr[]=$this->debut;
-  
+$this->debut=date("Y-m-d H:i:s", (strtotime(date($this->debut)) + $pas));
+}}
 
-
-     $this->debut=date("Y-m-d H:i:s", (strtotime(date($this->debut)) + $pas));
-    
-    
     }
-
 foreach ($arr as $key ) {
-    $this->bot->reply("z".$key);
+    $this->bot->reply($key);
 }
 return;
   
@@ -156,7 +153,7 @@ else {
 
 $question = Question::create("المواعيد المتاحة   ")
 ->addButtons($arr2);
-            return $this->ask($question, function (Answer $answer) {
+$this->ask($question, function (Answer $answer) {
                 $this->reponse=$answer->getValue();
                 if ($answer->isInteractiveMessageReply()) {
                 $type=Type::whereId($this->type)->first();
