@@ -56,17 +56,22 @@ class ExampleConversation extends Conversation
         if ($answer->isInteractiveMessageReply()) {
             $selectedValue = $answer->getValue();
             if($selectedValue == 'D0') {
+                date_default_timezone_set("Africa/Algiers");
+
                 $this->day=$this->today;
                  $this->AskTime(0);
            
             }
                 elseif($selectedValue == 'D1') {  
+                    date_default_timezone_set("Africa/Algiers");
+
                     $this->day=date('Y-m-d', strtotime($this->today. ' + 1 day'));
                    
                     $this->AskTime(1);
 
                 }
-                else {  $this->day=date('Y-m-d', strtotime($this->today. ' + 2 day'));
+                else {          date_default_timezone_set("Africa/Algiers");
+                    $this->day=date('Y-m-d', strtotime($this->today. ' + 2 day'));
                   
                     $this->AskTime(2);
 
