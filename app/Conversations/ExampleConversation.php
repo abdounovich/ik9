@@ -107,7 +107,7 @@ $time_now = date("Y-m-d H:i:s");
 while ($this->debut < $this->fin) {
 
 
-    if($shift="0"){
+    if($shift=="0"){
 if ($this->debut<$time_now) {
 }
 else {
@@ -116,7 +116,7 @@ $this->debut=date("Y-m-d H:i:s", (strtotime(date($this->debut)) + $pas));
 }}
 
     }
-    if ($arr=="") {
+    if (empty($arr)) {
 $this->bot->reply('kholso ');  return;  }
 else{
 foreach ($arr as $key ) {
