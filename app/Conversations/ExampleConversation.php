@@ -117,7 +117,7 @@ $this->debut=date("Y-m-d H:i:s", (strtotime(date($this->debut)) + $pas));
     
    
 foreach ($arr as $key ) {
-    if($key>$time_now){
+    if($key<$time_now){
     $this->bot->reply($key);
 }}
 return;
