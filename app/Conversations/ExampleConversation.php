@@ -129,6 +129,9 @@ else
 $arr[]="";
 
 }
+foreach ($arr3 as $key ) {
+    $this->bot->reply($key);
+}
 return;
   
 
