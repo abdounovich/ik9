@@ -103,9 +103,9 @@ $arr3=array();
 date_default_timezone_set("Africa/Algiers");
 
 $time_now = date("Y-m-d H:i:s");
-
-
-
+$this->debut=5;
+$this->fin=20;
+$time_now = 10;
 while ($this->debut < $this->fin) {
 
 
@@ -117,8 +117,9 @@ if ($this->debut<$time_now) {
 else {
 
     $arr[]=$this->debut;
-$this->debut=date("Y-m-d H:i:s", (strtotime(date($this->debut)) + $pas));
-}}
+    $this->debut=$this->debut+1;
+/* $this->debut=date("Y-m-d H:i:s", (strtotime(date($this->debut)) + $pas));
+ */}}
 
     }
     if (empty($arr)) {
