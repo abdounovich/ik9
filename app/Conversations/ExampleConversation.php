@@ -100,6 +100,7 @@ $arr2=array();
 $arr3=array();
 
 
+date_default_timezone_set("Africa/Algiers");
 
 $time_now = date("Y-m-d H:i:s");
 
