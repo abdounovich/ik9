@@ -113,13 +113,17 @@ while ($this->debut < $this->fin) {
     $arr[]=$this->debut;
 $this->debut=date("Y-m-d H:i:s", (strtotime(date($this->debut)) + $pas));
 }
+$this->bot->reply($time_now);
+$this->bot->reply($this->debut);
 
-    
    
 foreach ($arr as $key ) {
     if($key>$time_now){
-    $this->bot->reply($key);
-}}
+$arr3[]=$key;}
+else
+$arr[]="";
+
+}
 return;
   
 
