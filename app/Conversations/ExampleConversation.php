@@ -116,6 +116,8 @@ $this->debut=date("Y-m-d H:i:s", (strtotime(date($this->debut)) + $pas));
 }}
 
     }
+    if ($arr=="") {
+$this->bot->reply('kholso ');    }
 foreach ($arr as $key ) {
     $this->bot->reply($key);
 }
