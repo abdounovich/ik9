@@ -83,8 +83,8 @@ class ExampleConversation extends Conversation
     }
 public function AskTime($shift){
 
-$this->debut="00:18";
-$this->fin="00:22";
+$this->debut="00:22";
+$this->fin="00:32";
 $this->jour="";
 /* return view('test'); */
 $pas=60*1;
@@ -103,34 +103,25 @@ $arr3=array();
 date_default_timezone_set("Africa/Algiers");
 
 $time_now = date("Y-m-d H:i:s");
-$this->debut=5;
-$this->fin=20;
-$time_now = 10;
+
+
+
 while ($this->debut < $this->fin) {
 
 
-    if($shift=="0"){
-
-if ($this->debut<$time_now) {
-
-}
-else {
-
+  
     $arr[]=$this->debut;
-    $this->debut=$this->debut+1;
-/* $this->debut=date("Y-m-d H:i:s", (strtotime(date($this->debut)) + $pas));
- */}}
+$this->debut=date("Y-m-d H:i:s", (strtotime(date($this->debut)) + $pas));
+}
 
-    }
-    if (empty($arr)) {
-$this->bot->reply('kholso ');  return;  }
-else{
+    
+   
 foreach ($arr as $key ) {
     $this->bot->reply($key);
 }
 return;
   
-}
+
    
 
 
