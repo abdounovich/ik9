@@ -104,15 +104,13 @@ date_default_timezone_set("Africa/Algiers");
 
 $time_now = date("Y-m-d H:i:s");
 
-$this->bot->reply($time_now);
-$this->bot->reply($this->debut);
 
 while ($this->debut < $this->fin) {
 
 
     if($shift=="0"){
 
-if ($this->debut>$time_now) {
+if ($this->debut<$time_now) {
 
 }
 else {
