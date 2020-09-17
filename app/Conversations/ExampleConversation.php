@@ -301,7 +301,7 @@ if($Tos){
                 $this->say('لقد تم حجز موعدك بنجاح ');
                 $DbUsername=Client::whereFacebook($this->facebook)->first();
 
-                $this->say(ButtonTemplate::create(' ⏰ موعد حلاقتك  ')
+                $this->say(ButtonTemplate::create(' ⏰ موعد حلاقتك  '.$this->jour." ".$this->debut)
                 ->addButton(ElementButton::create(' 📅 الزمن المتبقي لموعدي')
                 ->url($this->config.'/client/'.$DbUsername->slug)
             
