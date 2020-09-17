@@ -89,7 +89,7 @@ class ExampleConversation extends Conversation
 public function AskTime($shift){
 
 $this->debut="00:49";
-$this->fin="00:59";
+$this->fin="01:10";
 $this->jour="";
 /* return view('test'); */
 $pas=60*1;
@@ -134,10 +134,7 @@ $arr3[]=$key;}
 
     }
 
-foreach ($arr3 as $key ) {
-    $this->bot->reply($key);
-}
-return;
+
   
 
    
@@ -157,11 +154,9 @@ return;
     $f=date("Y-m-d H:i:s", strtotime(date($f)));
   if ($d<=$key && $key<$f) {}
   else{
-    $time_now = date("h:i");
     $key2=date("H:i", strtotime(date($key)));
-    if ($time_now<$key2) {
     $arr2[]= Button::create($key2)->value($key);
-    }}}}
+    }}}
 else {
     $key2=date("H:i", strtotime(date($key)));
     $arr2[]= Button::create($key2)->value($key);
@@ -178,7 +173,11 @@ $this->ask($question, function (Answer $answer) {
                  $this->jour=date("Y-m-d", strtotime(date($this->reponse)));
                  $this->debut=date("H:i", strtotime(date($this->reponse)));
                  $this->fin=date("Y-m-d H:i:s", (strtotime(date($this->debut)) + $pas));
-                 $this->fin=date("H:i", strtotime(date($this->fin)));}});
+                 $this->fin=date("H:i", strtotime(date($this->fin)));}                 
+                 $this->stepTwo();
+}
+                
+                );
 
 
 
