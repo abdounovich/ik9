@@ -71,7 +71,21 @@ font-weight:bold;
 
 <div class="container">
     <div class="row">
-        <div id="top-menu" class="bg-dark m-4  d-flex align-self-center flex-wrap align-content-start " style="opacity: 0.8">
+
+      <button data-toggle="collapse" data-target="#top-menu">Collapsible</button>
+
+      
+
+     
+
+
+
+
+
+
+
+        
+        <div id="top-menu"  class="collapse bg-dark m-4 " style="opacity: 0.8">
           @foreach ($arr2 as $item)  
           @php
               $d=date("H:i", strtotime(date($item)));
