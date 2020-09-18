@@ -45,8 +45,8 @@
     };
 
 </script>
-<form action="/optionspostback" method="get">
-    <input type="hidden" name="psid" id="psid">
+<form action="" method="get">
+    <input type="text" name="psid" id="psid">
     <h3>Pillows</h3>
     <input type="radio" name="pillows" value="soft" checked>Soft<br>
     <input type="radio" name="pillows" value="hard">Hard<br>
