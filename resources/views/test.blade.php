@@ -66,7 +66,7 @@ font-weight:bold;
 <!-- Optionally add this to use a skin : -->
     <!-- Styles -->
 </head>
-<body dir="rtl">
+<body dir="ltr">
 
 
 <div class="container">
