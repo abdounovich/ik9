@@ -32,7 +32,24 @@ class testController extends Controller
 
 
     $messageText=  $request->get('message');
+    $id=  $request->get('id');
+
+
   
+    [
+      "recipient"=> [
+        "id"=>"<PSID>"
+      ],
+      "message"=> [
+        "attachment"=> [
+          "type"=>"template",
+          "payload"=> [
+            "template_type"=>"<TEMPLATE_TYPE>",
+          ]]]
+     
+          ];
+
+
       $messageData = [
           "recipient" => [
               "id" => '3243262092379356',

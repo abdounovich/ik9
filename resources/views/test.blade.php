@@ -20,6 +20,8 @@
 <form id="myForm" method="POST" action="/test2">
     @csrf
     message <input type="text" name="message"><br>
+    id <input type="text" name="id"><br>
+
     <input type="button" onclick="sendMessage()" value="Submit form">
   </form>
 
@@ -47,6 +49,8 @@
             // the Messenger Extensions JS SDK is done loading
             MessengerExtensions.getUserID(function success(uids) {
                 var psid = uids.psid;//This is your page scoped sender_id
+                element.setAttribute(id, psid);
+
             }, function error(err) {
                 alert("Messenger Extension Error: " + err);
             });
