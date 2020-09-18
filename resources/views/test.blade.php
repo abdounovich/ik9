@@ -52,14 +52,10 @@ background-color: green;
 color: white;
 font-weight:bold;
 }
-#top-menu a:focus
-{
-    color: white;
-    background-color:crimson
-}
+
 #top-menu a:hover{
     color: white;
-    background-color:blue
+    background-color:crimson
 }
 
 
