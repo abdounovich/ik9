@@ -19,7 +19,7 @@
     </style>
 <form id="myForm" method="post" action="/test2">
     message <input type="text" name="message"><br>
-    <input type="button" onclick="sendMessage()" value="Submit form">
+    <input type="submit"  value="Submit form">
   </form>
 
     <script type="text/javascript">
