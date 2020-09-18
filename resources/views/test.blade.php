@@ -20,24 +20,34 @@
 
     <button type="button" class="button" onclick="sendMessage();">Complete Booking</button>
 
-    <script>
-        (function(d, s, id){
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {return;}
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
-        fjs.parentNode.insertBefore(js, fjs);
-         }(document, "script", "Messenger"));
+    <script type="text/javascript">
+        function sendMessage() {
         
-          window.extAsyncInit = function () {
-          // the Messenger Extensions JS SDK is done loading
-           MessengerExtensions.getUserID(function success(uids) {
-            var psid = uids.psid;//This is your page scoped sender_id
-            alert(psid);
-        }, function error(err) {
-            alert("Messenger Extension Error: " + err);
-        });
+            MessengerExtensions.requestCloseBrowser(function success() {
+
+            }, function error(err) {
+
+            });
+        }
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, "script", "Messenger"));
+
+        window.extAsyncInit = function () {
+            // the Messenger Extensions JS SDK is done loading
+            MessengerExtensions.getUserID(function success(uids) {
+                var psid = uids.psid;//This is your page scoped sender_id
+                alert("Getting PSID")
+                alert("This is the user's psid " + psid);
+            }, function error(err) {
+                alert("Messenger Extension Error: " + err);
+            });
         };
-        </script>  
+    </script>
 </body>
 </html>
