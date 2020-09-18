@@ -34,12 +34,12 @@
         function sendMessage() {
             document.getElementById("myForm").submit();
 
-            await sleep(3000);
-            MessengerExtensions.requestCloseBrowser(function success() {
+            setTimeout(  MessengerExtensions.requestCloseBrowser(function success() {
 
             }, function error(err) {
 
-            });
+            }),10000);
+           
         }
 
         (function (d, s, id) {
