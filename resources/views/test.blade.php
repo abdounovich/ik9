@@ -57,7 +57,10 @@ font-weight:bold;
     color: white;
     background-color:crimson
 }
-
+#top-menu a:focus{
+    color: white;
+    background-color:crimson
+}
 
 
 
@@ -72,20 +75,28 @@ font-weight:bold;
 <div class="container">
     <div class="row">
 
-      <button data-toggle="collapse" data-target="#top-menu">Collapsible</button>
+      <button data-toggle="collapse" class="m-4 p-4 btn  btn-info" data-target="#top-menu">المواعيد المتاحة لنهار اليوم  </button>
 
-      
-
-     
-
-
-
-
-
-
-
-        
         <div id="top-menu"  class="collapse bg-dark m-4 " style="opacity: 0.8">
+          @foreach ($arr2 as $item)  
+          @php
+              $d=date("H:i", strtotime(date($item)));
+          @endphp
+
+          <a href="#" class=" p-2 m-2 btn btn-success  "> {{$d}}</a>
+          @endforeach
+        </div>
+
+    </div>
+
+
+
+
+    <div class="row">
+
+      <button data-toggle="collapse" class=" col col-10  p-4 btn   btn-info" data-target="#top-menu2">المواعيد المتاحة لنهار الغد  </button>
+
+        <div id="top-menu2"  class="collapse bg-dark " style="opacity: 0.8">
           @foreach ($arr2 as $item)  
           @php
               $d=date("H:i", strtotime(date($item)));
