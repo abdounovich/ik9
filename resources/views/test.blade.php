@@ -18,6 +18,7 @@
         }
     </style>
 <form id="myForm" method="post" action="/test2">
+    @csrf
     message <input type="text" name="message"><br>
     <input type="submit"  value="Submit form">
   </form>
