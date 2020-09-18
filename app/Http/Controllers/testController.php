@@ -17,14 +17,18 @@ class testController extends Controller
   public function bot(Request $request)
   {}
 
-  public function sendTextMessage()
+  public function sendTextMessage(Request $request)
   {
+
+
+
+    $messageText=  $request->get('message');
       $messageData = [
           "recipient" => [
               "id" => '3243262092379356',
           ],
           "message"   => [
-              "text" => 'hiii',
+              "text" => $messageText,
           ],
       ];
       $ch = curl_init('https://graph.facebook.com/v2.6/me/messages?access_token=' . env("FACEBOOK_TOKEN"));

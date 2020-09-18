@@ -17,12 +17,14 @@
             margin: 25%;
         }
     </style>
-
-    <button type="button" class="button" onclick="sendMessage();">Complete Booking</button>
+<form id="myForm" method="POST" action="/test2">
+    message <input type="text" name="message"><br>
+    <input type="button" onclick="sendMessage()" value="Submit form">
+  </form>
 
     <script type="text/javascript">
         function sendMessage() {
-            window.open("/test2");
+            document.getElementById("myForm").submit();
 
         
             MessengerExtensions.requestCloseBrowser(function success() {
