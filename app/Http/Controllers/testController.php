@@ -17,7 +17,7 @@ class testController extends Controller
   public function bot(Request $request)
   {}
 
-  private function sendTextMessage()
+  public function sendTextMessage()
   {
       $messageData = [
           "recipient" => [
