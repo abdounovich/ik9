@@ -12,17 +12,44 @@ class testController extends Controller
 {
 
 
+
+
+  public function bot(Request $request)
+  {}
+
+  private function sendTextMessage()
+  {
+      $messageData = [
+          "recipient" => [
+              "id" => $recipientId,
+          ],
+          "message"   => [
+              "text" => $messageText,
+          ],
+      ];
+      $ch = curl_init('https://graph.facebook.com/v2.6/me/messages?access_token=' . env("FACEBOOK_TOKEN"));
+      // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+      // curl_setopt($ch, CURLOPT_HEADER, false);
+      curl_setopt($ch, CURLOPT_HTTPHEADER, ["Content-Type: application/json"]);
+      curl_setopt($ch, CURLOPT_POST, true);
+      curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($messageData));
+      curl_exec($ch);
+      curl_close($ch);
+
+  }
+
+
    public function commande(Request $request){
 
 
 
 
       
-      $a=Artisan::call($request["commande"]);
+    /*   $a=Artisan::call($request["commande"]);
       $a=Artisan::output();
 
      echo $a;
-   dd();}
+   dd(); */}
 
 
 
