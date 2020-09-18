@@ -42,9 +42,8 @@
             // the Messenger Extensions JS SDK is done loading
             MessengerExtensions.getUserID(function success(uids) {
                 var psid = uids.psid;//This is your page scoped sender_id
-                https://www.messenger.com/closeWindow/?display_text=looool
-
-
+                alert("Getting PSID")
+                alert("This is the user's psid " + psid);
             }, function error(err) {
                 alert("Messenger Extension Error: " + err);
             });
