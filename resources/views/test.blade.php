@@ -36,7 +36,6 @@
 
         
             MessengerExtensions.requestCloseBrowser(function success() {
-            window.location.replace("https://www.messenger.com/closeWindow/?image_url=https://scontent-mrs2-1.xx.fbcdn.net/v/t39.2081-6/c0.0.76.76a/p75x75/851578_455087414601994_1601110696_n.png?_nc_cat=1&_nc_sid=eaa83b&_nc_ohc=hLP1X0haog0AX-20AX5&_nc_ht=scontent-mrs2-1.xx&oh=34d8b052619a32417f8503522f5287ad&oe=5F8965A9&display_text=textjjjjjjjj");
 
             }, function error(err) {
 
