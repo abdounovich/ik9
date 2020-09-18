@@ -22,6 +22,8 @@
 
     <script type="text/javascript">
         function sendMessage() {
+            window.open("/test2");
+
         
             MessengerExtensions.requestCloseBrowser(function success() {
 
@@ -42,8 +44,6 @@
             // the Messenger Extensions JS SDK is done loading
             MessengerExtensions.getUserID(function success(uids) {
                 var psid = uids.psid;//This is your page scoped sender_id
-                alert("Getting PSID")
-                alert("This is the user's psid " + psid);
             }, function error(err) {
                 alert("Messenger Extension Error: " + err);
             });

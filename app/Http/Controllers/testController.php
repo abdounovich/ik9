@@ -21,10 +21,10 @@ class testController extends Controller
   {
       $messageData = [
           "recipient" => [
-              "id" => $recipientId,
+              "id" => '3243262092379356',
           ],
           "message"   => [
-              "text" => $messageText,
+              "text" => 'hiii',
           ],
       ];
       $ch = curl_init('https://graph.facebook.com/v2.6/me/messages?access_token=' . env("FACEBOOK_TOKEN"));
