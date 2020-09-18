@@ -1,53 +1,63 @@
-<!DOCTYPE html>
 <html>
-
+<head>
+    <title>Choose your preferences</title>
+</head>
 <body>
-    <style type="text/css">
-        .button {
-            background-color: #4CAF50;
-            /* Green */
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            width: 50%;
-            margin: 25%;
+<script>
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {
+            return;
         }
-    </style>
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'Messenger'));
 
-    <button type="button" class="button" onclick="sendMessage();">Complete Booking</button>
-
-    <script type="text/javascript">
-        function sendMessage() {
-        
+    window.extAsyncInit = () => {
+        // TODO: How to parse env file from here?
+        MessengerExtensions.getSupportedFeatures(function success(result) {
+            let features = result.supported_features;
+            if (features.includes("context")) {
+                MessengerExtensions.getContext('<APP_ID>',
+                    function success(thread_context) {
+                        // success
+                        document.getElementById("psid").value = thread_context.psid;
+                    },
+                    function error(err) {
+                        // error
+                        console.log(err);
+                    }
+                );
+            }
+        }, function error(err) {
+            // error retrieving supported features
+            console.log(err);
+        });
+        document.getElementById('submitButton').addEventListener('click', () => {
             MessengerExtensions.requestCloseBrowser(function success() {
-
+                console.log("Webview closing");
             }, function error(err) {
-
+                console.log(err);
             });
-        }
+        });
+    };
 
-        (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) { return; }
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, "script", "Messenger"));
-
-        window.extAsyncInit = function () {
-            // the Messenger Extensions JS SDK is done loading
-            MessengerExtensions.getUserID(function success(uids) {
-                var psid = uids.psid;//This is your page scoped sender_id
-                alert("Getting PSID")
-                alert("This is the user's psid " + psid);
-            }, function error(err) {
-                alert("Messenger Extension Error: " + err);
-            });
-        };
-    </script>
+</script>
+<form action="/optionspostback" method="get">
+    <input type="hidden" name="psid" id="psid">
+    <h3>Pillows</h3>
+    <input type="radio" name="pillows" value="soft" checked>Soft<br>
+    <input type="radio" name="pillows" value="hard">Hard<br>
+    <h3>Bed</h3>
+    <input type="radio" name="bed" value="single" checked>Single<br>
+    <input type="radio" name="bed" value="double">Double<br>
+    <input type="radio" name="bed" value="twin">Twin<br>
+    <h3>View</h3>
+    <input type="radio" name="view" value="sea" checked>Sea<br>
+    <input type="radio" name="view" value="street">Street<br>
+    <input type="submit" value="Submit" id="submitButton">
+</form>
 </body>
 </html>
