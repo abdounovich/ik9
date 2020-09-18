@@ -32,8 +32,7 @@ class testController extends Controller
 
 
     $messageText=  $request->get('message');
-    echo $messageText;
-    dd();
+  
       $messageData = [
           "recipient" => [
               "id" => '3243262092379356',
