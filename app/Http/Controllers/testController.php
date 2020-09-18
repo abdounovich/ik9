@@ -89,11 +89,74 @@ class testController extends Controller
    {
 
 
+    date_default_timezone_set("Africa/Algiers");
+
+    $debut="16:00";
+    $debut=date("Y-m-d ").$debut.":00";
+    $debut=date("Y-m-d H:i:s", strtotime(date($debut)));
+    
+    $fin="22:00";
+    $fin=date("Y-m-d ").$fin.":00";
+    $fin=date("Y-m-d H:i:s", strtotime(date($fin)));
+    
+    $pas=60*30;
+    $arr=array();
+    $arr2=array();
+    
+    $d="18:00";
+    $d=date("Y-m-d ").$d.":00";
+    $d=date("Y-m-d H:i:s", strtotime(date($d)));
+    
+    
+    $f="19:00";
+    $f=date("Y-m-d ").$f.":00";
+    $f=date("Y-m-d H:i:s", strtotime(date($f)));
+    
+    
+    while ($debut <= $fin) {
+         $arr[]=$debut;
+    
+         $debut=date("Y-m-d H:i:s", (strtotime(date($debut)) + $pas));
+    
+    }
+    
+     
+    
+    
+    
+      foreach ($arr as $key ) { 
+      if ($d<=$key && $key<$f) {
+    
+    
+    
+      }
+      else{
+    
+        $arr2[]=$key;
+      }
+    
+    
+    
+    
+       
+    
+    } 
+        return view("test")->with('arr2',$arr2);
+
+    } }
 
 
-    return view("test");
 
 
+
+
+
+
+
+  
+
+
+/* 
     $days = array();
     $days[]="more";
 
@@ -121,69 +184,12 @@ echo $key;}
 
 
 
-dd();
+dd(); */
 
 
 
 
-      date_default_timezone_set("Africa/Algiers");
 
-$debut="16:00";
-$fin="22:00";
-/* return view('test'); */
-$pas=60*30;
-$arr=array();
-
-
-
-$debut=date("Y-m-d ").$debut.":00";
-$debut=date("Y-m-d H:i:s", strtotime(date($debut)));
-
-$fin=date("Y-m-d ").$fin.":00";
-$fin=date("Y-m-d H:i:s", strtotime(date($fin)));
-$arr2=array();
-
-$d="18:00";
-$d=date("Y-m-d ").$d.":00";
-$d=date("Y-m-d H:i:s", strtotime(date($d)));
-
-
-$f="19:00";
-$f=date("Y-m-d ").$f.":00";
-$f=date("Y-m-d H:i:s", strtotime(date($f)));
-
-
-while ($debut <= $fin) {
-     $arr[]=$debut;
-
-     $debut=date("Y-m-d H:i:s", (strtotime(date($debut)) + $pas));
-
-}
-
- 
-
-
-
-  foreach ($arr as $key ) { 
-  if ($d<=$key && $key<$f) {
-
-
-
-  }
-  else{
-
-    $arr2[]=$key;
-  }
-
-
-
-
-   
-
-} foreach ($arr2 as $key2) {
-  echo $key2."<p></p>";}
-
-} }
 
 
 
