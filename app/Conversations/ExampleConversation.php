@@ -88,8 +88,8 @@ class ExampleConversation extends Conversation
     }
 public function AskTime($shift){
 
-$this->debut="00:49";
-$this->fin="01:10";
+$this->debut="09:00";
+$this->fin="12:00";
 $this->jour="";
 /* return view('test'); */
 $pas=60*1;
@@ -102,6 +102,7 @@ $this->debut=date("Y-m-d H:i:s", strtotime(date($this->debut)));
 $this->fin=date("Y-m-d ").$this->fin.":00";
 $this->fin=date("Y-m-d H:i:s", strtotime(date($this->fin)));
 $arr2=array();
+
 $arr3=array();
 
 
@@ -117,22 +118,121 @@ while ($this->debut < $this->fin) {
   
     $arr[]=$this->debut;
 $this->debut=date("Y-m-d H:i:s", (strtotime(date($this->debut)) + $pas));
+
+
+
 }
 
 
-   if ($shift=="0") {
-   
-foreach ($arr as $key ) {
-    if($key>$time_now){
-$arr3[]=$key;}
-    }}
-    else{
-        foreach ($arr as $key ) {
-           
-        $arr3[]=$key;}
-            
+if (count($arr)>10) {
 
-    }
+
+
+  
+$total=count($arr)/10;
+$this->dd=ceil($total);
+$a=0;
+$b=$a+10;
+for ($i=1; $i <$this->dd+1 ; $i++) { 
+${"array".$i}=array(); 
+while ($a<$b && $a<count($arr) ) { 
+  ${"array".$i}[]=$arr[$a];
+
+$a++;
+}
+$b=$a+10;
+}
+
+for ($mk=1; $mk <$this->dd+1; $mk++) { 
+    ${"thearr".$mk}=array(); 
+foreach (${"array".$mk} as $key ) {
+}
+    ${"thearr".$mk}= Button::create($key)->value($key);
+
+}
+
+
+
+
+$apps=Appointment::where('ActiveType','1')->whereJour($this->day)->get();
+
+for ($lk=0; $lk <$this->dd ; $lk++) { 
+
+
+
+
+    
+if ($shift=="0") {
+   
+    foreach ($arr as $key ) {
+    
+    
+        
+        if($key>$time_now){
+    $arr3[]=$key;}
+        }}
+        else{
+            foreach ($arr as $key ) {
+    
+               
+            $arr3[]=$key;
+        
+        }
+                
+    
+        }
+
+    
+
+foreach ($arr3 as $key ) {
+  if ($apps->count()>0) {
+  foreach ($apps as $app ) {
+  $d=date("Y-m-d ").$app->debut.":00";
+  $d=date("Y-m-d H:i:s", strtotime(date($d)));
+  $f=date("Y-m-d ").$app->fin.":00";
+  $f=date("Y-m-d H:i:s", strtotime(date($f)));
+if ($d<=$key && $key<$f) {}
+else{
+  $key2=date("H:i", strtotime(date($key)));
+  $arr2[]= Button::create($key2)->value($key);
+  }}}
+else {
+  $key2=date("H:i", strtotime(date($key)));
+  $arr2[]= Button::create($key2)->value($key);
+  }
+  }}
+$question = Question::create("المواعيد المتاحة   ")
+->addButtons($arr2);
+$this->ask($question, function (Answer $answer) {
+              $this->reponse=$answer->getValue();
+              if ($answer->isInteractiveMessageReply()) {
+              $type=Type::whereId($this->type)->first();
+              $pas=$type->temps*60;
+               $this->jour=date("Y-m-d", strtotime(date($this->reponse)));
+               $this->debut=date("H:i", strtotime(date($this->reponse)));
+               $this->fin=date("Y-m-d H:i:s", (strtotime(date($this->debut)) + $pas));
+               $this->fin=date("H:i", strtotime(date($this->fin)));}                 
+               $this->stepTwo();} 
+              );
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+else{
+
+
+
+
 
 
   
@@ -156,13 +256,14 @@ $arr3[]=$key;}
   else{
     $key2=date("H:i", strtotime(date($key)));
     $arr2[]= Button::create($key2)->value($key);
+    
     }}}
 else {
     $key2=date("H:i", strtotime(date($key)));
     $arr2[]= Button::create($key2)->value($key);
-    }
-    }
 
+    }
+    }
 $question = Question::create("المواعيد المتاحة   ")
 ->addButtons($arr2);
 $this->ask($question, function (Answer $answer) {
@@ -174,10 +275,11 @@ $this->ask($question, function (Answer $answer) {
                  $this->debut=date("H:i", strtotime(date($this->reponse)));
                  $this->fin=date("Y-m-d H:i:s", (strtotime(date($this->debut)) + $pas));
                  $this->fin=date("H:i", strtotime(date($this->fin)));}                 
-                 $this->stepTwo();
-}
+                 $this->stepTwo();} 
                 
                 );
+            
+            }
 
 
 

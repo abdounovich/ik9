@@ -13,13 +13,61 @@ class testController extends Controller
 
 
    public function commande(Request $request){
+
+
+
+
       
       $a=Artisan::call($request["commande"]);
       $a=Artisan::output();
 
      echo $a;
    dd();}
-   public function index(){
+
+
+
+   public function index()
+   
+   {
+
+
+
+
+    return view("test");
+
+
+    $days = array();
+    $days[]="more";
+
+
+
+    for ($i=1; $i <=10 ; $i++) { 
+      $array[]=$i;
+    }
+    $total=count($array)/10;
+    $dd=ceil($total);
+    $a=0;
+    $b=$a+10;
+    for ($i=1; $i <$dd+1 ; $i++) { 
+    ${"array".$i}=array(); 
+    while ($a<$b && $a<count($days) ) { 
+      ${"array".$i}[]=$days[$a];
+    $a++;
+    }
+    $b=$a+10;
+ }
+
+
+foreach (${"array"."1"} as $key ) {
+echo $key;}
+
+
+
+dd();
+
+
+
+
       date_default_timezone_set("Africa/Algiers");
 
 $debut="16:00";

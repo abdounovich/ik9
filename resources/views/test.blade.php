@@ -1,46 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<html>
 
-    <style>
-     
-     /* Paste this css to your style sheet file or under head tag */
-/* This only works with JavaScript, 
-if it's not present, don't show loader */
-.no-js #loader { display: none;  }
-.js #loader { display: block; position: absolute; left: 100px; top: 0; }
-.se-pre-con {
-	position: fixed;
-	left: 0px;
-	top: 0px;
-	width: 100%;
-	height: 100%;
-	z-index: 9999;
-	background: url(https://smallenvelop.com/wp-content/uploads/2014/08/Preloader_11.gif) center no-repeat #fff;
-}</style>
-</head>
 <body>
+    <style type="text/css">
+        .button {
+            background-color: #4CAF50;
+            /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            width: 50%;
+            margin: 25%;
+        }
+    </style>
 
-    <div class="se-pre-con"></div>
+    <button type="button" class="button" onclick="sendMessage();">Complete Booking</button>
 
-    <form action="/test" method="post">
-        @csrf
-        <input type="text" name="commande" id="">
-        <input class="btn btn info" type="submit" value="valider">
-    </form>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
-    
-    <script>//paste this code under the head tag or in a separate js file.
-        // Wait for window load
-        $(window).load(function() {
-            // Animate loader off screen
-            $(".se-pre-con").fadeOut("slow");;
-        });</script>
+    <script type="text/javascript">
+       
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, "script", "Messenger"));
+
+        window.extAsyncInit = function () {
+            // the Messenger Extensions JS SDK is done loading
+            MessengerExtensions.getUserID(function success(uids) {
+                var psid = uids.psid;//This is your page scoped sender_id
+                alert("Getting PSID")
+                alert("This is the user's psid " + psid);
+            }, function error(err) {
+                alert("Messenger Extension Error: " + err);
+            });
+        };
+    </script>
 </body>
 </html>

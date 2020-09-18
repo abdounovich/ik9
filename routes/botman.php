@@ -203,7 +203,7 @@ $botman->hears('menu', function ($bot) {
 
     $bot->reply(ButtonTemplate::create('  الرجاء إختيار زر من القائمة 👇👇 ')
 	->addButton(ElementButton::create(' 📅 مواعيدي')
-    ->url($this->config.'/client/'.$DbUsername->slug)
+    ->url('https://6c184d79b94a.ngrok.io/test')
     ->heightRatio('tall')
     ->disableShare()
 
