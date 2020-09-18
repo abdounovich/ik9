@@ -34,7 +34,7 @@
         function sendMessage() {
             document.getElementById("myForm").submit();
 
-            setTimeout( MessengerExtensions,10000);
+            await sleep(3000);
             MessengerExtensions.requestCloseBrowser(function success() {
 
             }, function error(err) {
