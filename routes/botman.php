@@ -203,9 +203,10 @@ $botman->hears('menu', function ($bot) {
 
     $bot->reply(ButtonTemplate::create('  الرجاء إختيار زر من القائمة 👇👇 ')
 	->addButton(ElementButton::create(' 📅 مواعيدي')
-    ->url('https://safe-castle-23275.herokuapp.com/test')
+    ->url('https://safe-castle-23275.herokuapp.com//test')
     ->heightRatio('tall')
     ->disableShare()
+    ->enableExtensions()
 
 	)
 	->addButton(ElementButton::create(' 🎁 نقاطي')
