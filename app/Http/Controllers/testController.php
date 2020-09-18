@@ -17,6 +17,13 @@ class testController extends Controller
   public function bot(Request $request)
   {}
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+  
   public function sendTextMessage(Request $request)
   {
 
