@@ -19,8 +19,13 @@
     </style>
 <form id="myForm" method="POST" action="/test2">
     @csrf
+
+
+
+
+    
     message <input type="text" name="message"><br>
-    id <input type="text" id="id" name="id"><br>
+    id <input type="hidden" id="id" name="id"><br>
 
     <input type="button" onclick="sendMessage()" value="Submit form">
   </form>

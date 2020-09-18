@@ -34,28 +34,28 @@ class testController extends Controller
     $messageText=  $request->get('message');
     $id=  $request->get('id');
 
-
-  
-    [
-      "recipient"=> [
-        "id"=>"<PSID>"
-      ],
-      "message"=> [
-        "attachment"=> [
-          "type"=>"template",
-          "payload"=> [
-            "template_type"=>"<TEMPLATE_TYPE>",
-          ]]]
-     
-          ];
-
-
       $messageData = [
           "recipient" => [
               "id" => $id,
           ],
-          "message"   => [
-              "text" => $messageText,
+          "message"=>[
+            "attachment"=>[
+        
+              "type"=>"template",
+              "payload"=>[
+                "template_type"=>"button",
+                "text"=>$messageText,
+                "buttons"=>[
+                  [
+                    "type"=>"web_url",
+                    "url"=>"https://www.messenger.com",
+                    "title"=>"Visit Messenger"
+                  ],
+                 
+                  
+                ]
+              ]
+            ]
           ],
       ];
       $ch = curl_init('https://graph.facebook.com/v2.6/me/messages?access_token=' . env("FACEBOOK_TOKEN"));
@@ -185,4 +185,22 @@ while ($debut <= $fin) {
 
 } }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
 
