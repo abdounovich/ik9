@@ -45,22 +45,12 @@ class testController extends Controller
 
 $jour=$request->get('jour');
 
-echo $id;
-echo "<p></p>";
 
-echo $fin;
-echo "<p></p>";
-
-echo $jour;
-echo "<p></p>";
-
-dd();
 
 $addApp=new Appointment();
 $addApp->facebook=$username;
-$addApp->type_id=$type;
+$addApp->type_id="1";
 $addApp->ActiveType="1";
-
 $addApp->fb_id=$id;
 $addApp->jour=$jour;
 $addApp->debut=$debut;
@@ -200,7 +190,7 @@ foreach ($arr4 as $k ) {
    $type=Type::find($type);
    return view("test")->with('items',$items)
    ->with('var',$var)
-   ->with('type',$type->temps)
+   ->with('type',$type->id)
    ->with('jour',$jour)
    ->with('username',$username)
    ->with('Cid',$Cid);
@@ -279,7 +269,7 @@ foreach ($arr4 as $k ) {
    $type=Type::find($type);
    return view("test")->with('items',$items)
    ->with('var',$var)
-   ->with('type',$type->temps)
+   ->with('type',$type->id)
    ->with('jour',$jour)
    ->with('username',$username)
    ->with('Cid',$Cid);  }
@@ -354,7 +344,7 @@ foreach ($arr4 as $k ) {
   $type=Type::find($type);
   return view("test")->with('items',$items)
   ->with('var',$var)
-  ->with('type',$type->temps)
+  ->with('type',$type->id)
   ->with('jour',$jour)
   ->with('username',$username)
   ->with('Cid',$Cid);}
