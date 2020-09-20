@@ -205,7 +205,6 @@ $botman->hears('menu', function ($bot) {
 	->addButton(ElementButton::create(' 📅 مواعيدي')
     ->url('https://safe-castle-23275.herokuapp.com/test/2/D1/'.$full_name."/".$DbUsername->id)
     ->heightRatio('full')
-    ->disableShare()
     ->enableExtensions()
 
 	)
