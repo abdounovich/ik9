@@ -149,7 +149,7 @@ if ($date=='Friday') {
     $fin=date("Y-m-d ").$fin.":00";
     $fin=date("Y-m-d H:i:s", strtotime(date($fin)));
     $types=Type::whereId($type)->first();
-
+dd($types->temps);
     $pas=60*$types->temps;
     $arr=array();
     $arr2=array();
