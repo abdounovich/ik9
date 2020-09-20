@@ -131,7 +131,6 @@ dd();
    public function today($type,$username,$Cid)
    
    {
-$types=Type::whereId($type)->first();
 date_default_timezone_set("Africa/Algiers");
     $date=date("l");   
 
@@ -149,6 +148,8 @@ if ($date=='Friday') {
     $debut=date("Y-m-d H:i:s", strtotime(date($debut)));  
     $fin=date("Y-m-d ").$fin.":00";
     $fin=date("Y-m-d H:i:s", strtotime(date($fin)));
+    $types=Type::whereId($type)->first();
+
     $pas=60*$types->temps;
     $arr=array();
     $arr2=array();
@@ -204,7 +205,6 @@ foreach ($arr4 as $k ) {
   
    public function tomorrow($type,$username,$Cid)
    {
-$types=Type::whereId($type)->first();
 date_default_timezone_set("Africa/Algiers");
 $date=date("l");
     $date=date("l", strtotime($date. ' + 1 day'));
@@ -225,6 +225,8 @@ if ($date=='Friday') {
     $debut=date("Y-m-d H:i:s", strtotime(date($debut)));  
     $fin=date("Y-m-d ").$fin.":00";
     $fin=date("Y-m-d H:i:s", strtotime(date($fin)));
+    $types=Type::whereId($type)->first();
+
     $pas=60*$types->temps;
     $arr=array();
     $arr2=array();
