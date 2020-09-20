@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Type;
+use App\Client;
 use Carbon\Carbon;
 use App\Appointment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Artisan;
 
 class testController extends Controller
@@ -81,7 +83,7 @@ $config=Config::get('app.url');
                 "buttons"=>[
                   [
                     "type"=>"web_url",
-                    "url"=>"www.google.com",
+                    "url"=>"$config.'/client/'.$client->slug",
                     "title"=>"تصفح  مواعيدي"
                   ],
                  
