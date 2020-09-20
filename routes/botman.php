@@ -119,7 +119,7 @@ if ($date=='Friday') {
      ->subtitle("السعر : ".$type->prix.' دج ')
      ->image($type->photo)
      ->addButton(ElementButton::create(' 📆 احجز موعدك الآن')
-     ->url('https://safe-castle-23275.herokuapp.com/test/1/D1/'.$full_name."/".$DbUsername->id)
+     ->url($this->config.'/test/'.$type->id.'/D1/'.$full_name."/".$DbUsername->id)
      ->heightRatio('tall')
      ->disableShare()
      ->enableExtensions());}
