@@ -17,7 +17,7 @@ use BotMan\Drivers\Facebook\Extensions\GenericTemplate;
 use BotMan\Drivers\Facebook\Extensions\MediaAttachmentElement;
 
 $this->config=Config::get('app.url');
-$this->number="";
+$this->config="https://b79031be1ed3.ngrok.io";
 $botman = resolve('botman');
 
 
@@ -176,7 +176,7 @@ $complet_message="  أنا آسف صديقي 😕  ".$full_name."\n"." كل ال
 
 
 
-$botman->hears('GoToDis', function (BotMan $bot) {
+$botman->hears('GoToDis', function ( $bot) {
     $bot->reply(Question::create('يوم ?')->addButtons([
         Button::create('اليوم')->value('rdv1'),
         Button::create('يوم الغد ')->value('rdv2'),
