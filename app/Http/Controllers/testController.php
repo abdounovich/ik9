@@ -81,7 +81,7 @@ $config=Config::get('app.url');
                 "buttons"=>[
                   [
                     "type"=>"web_url",
-                    "url"=>"$config.'/client/'.$client->slug",
+                    "url"=>"www.google.com",
                     "title"=>"تصفح  مواعيدي"
                   ],
                  
