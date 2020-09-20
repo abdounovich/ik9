@@ -143,11 +143,26 @@ $debut=date("Y-m-d H:i:s", (strtotime(date($debut)) + $pas));
                 $date = date("Y-m-d");
 
                 @endphp
-                @if ($jour==$date)
-                <div  class="h3 bg-dark text-white" >المواعيد المتاحة لنهار اليوم  </div>
+
+                @switch($var)
+                    @case(1)
+                    <div  class="h3 bg-success text-white text text-center p-2 m-2  rounded" >المواعيد المتاحة اليوم  </div>
+
+                        @break
+                    @case(2)
+                    <div  class="h3 bg-success text-white text text-center p-2 m-2  rounded" >المواعيد المتاحة غدا   </div>
+
+                        @break
+                  
+                        @case(3)
+                        <div  class="h3 bg-success text-white text text-center p-2 m-2  rounded" >المواعيد المتاحة بعد غد  </div>
+
+                     
+                @endswitch
+                @if ($var==1)
 
                 @endif
-            <div id="top-menu"  class=" bg-dark m-4 " style="opacity: 0.8">
+            <div id="top-menu"  class=" bg-dark m-2 p-2 align-self-center justify-content-center align-items-center " style="opacity: 0.8">
             @foreach ($items as $item)
             @php   
             date_default_timezone_set("Africa/Algiers");
@@ -158,14 +173,14 @@ $debut=date("Y-m-d H:i:s", (strtotime(date($debut)) + $pas));
                 
            
             @if ($item<$time_now)
-            <a href="#" class ="btn btn-warning disabled p-2 m-2 bg-danger text-white border border-danger"  >
+            <a href="#" class ="btn btn-warning disabled p-2 m-1 bg-danger text-white border border-danger"  >
             {{$item2}}
             </a>
             @else
-            <input class="btn btn-success  p-2 m-2" name="{{$item}}" onclick="getvalue()"  type="button" value="{{$item2}}">
+            <input class="btn btn-success  p-2 m-1" name="{{$item}}" onclick="getvalue()"  type="button" value="{{$item2}}">
             @endif
             @else
-            <input class="btn btn-success  p-2 m-2" name="{{$item}}"  onclick="getvalue()" type="button" value="{{$item2}}">
+            <input class="btn btn-success  p-2 m-1" name="{{$item}}"  onclick="getvalue()" type="button" value="{{$item2}}">
 
 
              @endif

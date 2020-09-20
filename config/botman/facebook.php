@@ -83,12 +83,12 @@ return [
                         [
                             'title' => ' 🛍 إحجز موعد  ',
                             'type' => 'postback',
-                            'payload' => 'rdv',
+                            'payload' => 'GoToDis',
                         ],
                     
                 
                         [
-                            'title' => ' 📆 نقاطي 🎁| مواعيدي',
+                            'title' => ' 📆 نقاطي 🎁  |  مواعيدي',
                             'type' => 'postback',
                             'payload' => 'menu',
                         ],

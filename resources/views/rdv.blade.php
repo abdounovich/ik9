@@ -62,8 +62,9 @@
           <span class="badge badge-success badge-pill p-2">{{$Actif_appointment->client->points}}</span> 
         </td>
         <td class="align-middle">{{$Actif_appointment->type->type}}</td>
-         <td class="align-middle">@php $demain = date('H:i', strtotime($Actif_appointment->temps));
-          echo $demain;
+         <td class="align-middle">@php $date = date('H:i', strtotime($Actif_appointment->debut));
+         
+          echo $date;
           @endphp</td>
             <td class="align-middle"> @php  carbon\Carbon::setLocale('ar');
               echo $Actif_appointment->created_at->diffForHumans(); @endphp    </td>
