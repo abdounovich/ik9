@@ -215,13 +215,13 @@ $debut=date("Y-m-d H:i:s", (strtotime(date($debut)) + $pas));
 
 
     
-<input type="text" name="message" value="شكرا لك  {{$username}} لقد تم حجز  موعدك بنجاح "> 
-   <input type="text" id="id" name="id"><br>
-   <input type="text" name="debut"  id="debut" >
-   <input type="text" name="type" id="type" value="{{$type}}">
-   <input type="text" name="jour" id="jour" value="{{$jour}}">
-   <input type="text" name="username" id="username" value="{{$username}}">
-   <input type="text" name="Cid" id="Cid" value="{{$Cid}}">
+<input type="hidden" name="message" value="شكرا لك  {{$username}} لقد تم حجز  موعدك بنجاح "> 
+   <input type="hidden" id="id" name="id"><br>
+   <input type="hidden" name="debut"  id="debut" >
+   <input type="hidden" name="type" id="type" value="{{$type}}">
+   <input type="hidden" name="jour" id="jour" value="{{$jour}}">
+   <input type="hidden" name="username" id="username" value="{{$username}}">
+   <input type="hidden" name="Cid" id="Cid" value="{{$Cid}}">
 
 
 
