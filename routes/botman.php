@@ -54,7 +54,7 @@ $bot->typesAndWaits(2);
     $bot->reply(ButtonTemplate::create(' كيف يمكننا خدمتك ؟ ')
 	->addButton(ElementButton::create(' 📆 احجز موعدك الآن')
 	    ->type('postback')
-	    ->payload('rdv')
+	    ->payload('GotoDis')
 	)
 	->addButton(ElementButton::create(' 🗒 تصفح مواعيدي ')
 	    ->url($this->config.'/client/'.$DbUsername->slug)
@@ -63,7 +63,7 @@ $bot->typesAndWaits(2);
 });
   
 
-$botman->hears('rdv', function($bot) {
+$botman->hears('rdv([0-9]+)', function($bot,$number) {
  
 
     $user = $bot->getUser();
@@ -119,7 +119,7 @@ if ($date=='Friday') {
      ->subtitle("السعر : ".$type->prix.' دج ')
      ->image($type->photo)
      ->addButton(ElementButton::create(' 📆 احجز موعدك الآن')
-     ->url($this->config.'/test/'.$type->id.'/D1/'.$full_name."/".$DbUsername->id)
+     ->url($this->config.'/test/'.$type->id.'/D'.$number."/".$full_name."/".$DbUsername->id)
      ->heightRatio('tall')
      ->disableShare()
      ->enableExtensions());}
@@ -176,7 +176,17 @@ $complet_message="  أنا آسف صديقي 😕  ".$full_name."\n"." كل ال
 
 
 
+$botman->hears('GoToDis', function (BotMan $bot) {
+    $bot->reply(Question::create('يوم ?')->addButtons([
+        Button::create('اليوم')->value('rdv1'),
+        Button::create('يوم الغد ')->value('rdv2'),
+        Button::create('بعد غد')->value('rdv3'),
 
+
+
+
+    ]));
+});
 
 $botman->hears('C([0-9]+)', function ($bot, $number) {
     $user = $bot->getUser();
@@ -205,7 +215,7 @@ $botman->hears('menu', function ($bot) {
 
     $bot->reply(ButtonTemplate::create('  الرجاء إختيار زر من القائمة 👇👇 ')
 	->addButton(ElementButton::create(' 📅 مواعيدي')
-    ->url($this->config.'test/1/D1/'.$full_name."/".$DbUsername->id)
+    ->url($this->config.'/client/'.$DbUsername->slug)
     ->heightRatio('tall')
     ->disableShare()
     ->enableExtensions()

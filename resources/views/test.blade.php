@@ -138,7 +138,15 @@ $debut=date("Y-m-d H:i:s", (strtotime(date($debut)) + $pas));
 
 
             <div class="container">
-            <div  class="h3 bg-dark text-white" >المواعيد المتاحة لنهار اليوم  </div>
+
+                @php
+                $date = date("Y-m-d");
+
+                @endphp
+                @if ($jour==$date)
+                <div  class="h3 bg-dark text-white" >المواعيد المتاحة لنهار اليوم  </div>
+
+                @endif
             <div id="top-menu"  class=" bg-dark m-4 " style="opacity: 0.8">
             @foreach ($items as $item)
             @php   
