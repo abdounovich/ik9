@@ -73,21 +73,12 @@ $botman->hears('rdv([0-9]+)', function($bot,$number) {
 // Access last name
 $lastname = $user->getLastname();
 $full_name=$firstname.'-'.$lastname;
-$OneApp=Appointment::where('facebook',$full_name)
-->where('ActiveType','1')->count();
+
 $DbUsername=Client::whereFacebook($full_name)->first();
 
-if ($OneApp>0) {
-    $bot->typesAndWaits(2);
 
-    $bot->reply(ButtonTemplate::create(' عذرا صديقي 😕 '.$full_name ."\n"." لقد حجزت موعد من قبل لا يمكنك حجز أكثر من موعد في نفس اليوم ")
-    ->addButton(ElementButton::create('🗒 تصفح مواعيدي  ')
-    ->url($this->config.'/client/'.$DbUsername->slug)
 
-    )
-    
-    );}
-else{
+
  $types=Type::all();
  $array=array();
  $bot->typesAndWaits(2);
@@ -105,7 +96,7 @@ else{
  ->addImageAspectRatio(GenericTemplate::RATIO_SQUARE)
  ->addElements($array)
 ); 
-}
+
  /* $Tos=Appointment::where('ActiveType','1')->get();
 $somme=0;
 foreach ($Tos as $To) {
@@ -155,6 +146,30 @@ $complet_message="  أنا آسف صديقي 😕  ".$full_name."\n"." كل ال
 
 
 $botman->hears('GoToDis', function ( $bot) {
+
+
+    $user = $bot->getUser();
+    $facebook_id = $user->getId();
+    // Access last name
+    $firstname = $user->getFirstname();
+// Access last name
+$lastname = $user->getLastname();
+$full_name=$firstname.'-'.$lastname;
+$OneApp=Appointment::where('facebook',$full_name)
+->where('ActiveType','1')->count();
+$DbUsername=Client::whereFacebook($full_name)->first();
+
+if ($OneApp>0) {
+    $bot->typesAndWaits(2);
+
+    $bot->reply(ButtonTemplate::create(' عذرا صديقي 😕 '.$full_name ."\n"." لقد حجزت موعد من قبل لا يمكنك حجز أكثر من موعد في نفس اليوم ")
+    ->addButton(ElementButton::create('🗒 تصفح مواعيدي  ')
+    ->url($this->config.'/client/'.$DbUsername->slug)
+
+));
+}
+    
+else{
     $bot->typesAndWaits(2);
 
     $bot->reply(Question::create('  من فضلك إختر يوم موعدك  👇👇')->addButtons([
@@ -163,10 +178,10 @@ $botman->hears('GoToDis', function ( $bot) {
     Button::create('🕐 اليوم')->value('rdv1'),
 
 
+    
 
 
-
-    ]));
+    ]));}
 });
 
 /* $botman->hears('C([0-9]+)', function ($bot, $number) {
