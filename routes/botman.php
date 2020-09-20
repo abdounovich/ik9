@@ -200,10 +200,12 @@ $botman->hears('menu', function ($bot) {
     $lastname = $user->getLastname();
     $full_name=$firstname.'-'.$lastname;
     $DbUsername=Client::whereFacebook($full_name)->first();
-
+$url="https://safe-castle-23275.herokuapp.com/test/".$type->id."/D1/".$full_name."/".$DbUsername->id;
+$bot->reply($url);
+return;
     $bot->reply(ButtonTemplate::create('  الرجاء إختيار زر من القائمة 👇👇 ')
 	->addButton(ElementButton::create(' 📅 مواعيدي')
-    ->url('https://safe-castle-23275.herokuapp.com/test/'.$type->id."/D1"."/".$full_name."/".$DbUsername->id)
+    ->url($url)
     ->heightRatio('tall')
     ->disableShare()
     ->enableExtensions()
