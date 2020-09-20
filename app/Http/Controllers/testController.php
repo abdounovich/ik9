@@ -32,8 +32,46 @@ class testController extends Controller
 
 
     $messageText=  $request->get('message');
-    $id=  $request->get('id');
+    $Cid=$request->get('Cid');
+    $id=$request->get('id');
+    $debut=$request->get('debut'); 
+    $type=$request->get('type');
+    $username=$request->get('username');
 
+   $fin=date("Y-m-d H:i:s", (strtotime(date($debut)) + $type*60));
+   $fin=date("H:i", strtotime(date($fin)));
+   $debut=date("H:i", strtotime(date($debut)));
+
+
+$jour=$request->get('jour');
+
+echo $id;
+echo "<p></p>";
+
+echo $fin;
+echo "<p></p>";
+
+echo $jour;
+echo "<p></p>";
+
+dd();
+
+$addApp=new Appointment();
+$addApp->facebook=$username;
+$addApp->type_id=$type;
+$addApp->ActiveType="1";
+
+$addApp->fb_id=$id;
+$addApp->jour=$jour;
+$addApp->debut=$debut;
+$addApp->fin=$fin;
+$addApp->client_id=$Cid;
+
+$addApp->save();
+echo"done";
+
+
+dd();
       $messageData = [
           "recipient" => [
               "id" => $id,
@@ -84,114 +122,246 @@ class testController extends Controller
 
 
 
-   public function index()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   public function today($type,$username,$Cid)
    
    {
+$types=Type::whereId($type)->first();
+date_default_timezone_set("Africa/Algiers");
+    $date=date("l");   
 
-
-    date_default_timezone_set("Africa/Algiers");
-
-    $debut="16:00";
-    $debut=date("Y-m-d ").$debut.":00";
-    $debut=date("Y-m-d H:i:s", strtotime(date($debut)));
-    
+if ($date=='Friday') {
+    $debut="09:00";
     $fin="22:00";
+ }elseif($date=='Saturday'){
+     $debut="09:00";
+     $fin="22:00";
+ }else{
+     $debut="16:00";
+     $fin="22:00";
+ }
+    $debut=date("Y-m-d ").$debut.":00";
+    $debut=date("Y-m-d H:i:s", strtotime(date($debut)));  
     $fin=date("Y-m-d ").$fin.":00";
     $fin=date("Y-m-d H:i:s", strtotime(date($fin)));
-    
-    $pas=60*30;
+    $pas=60*$types->temps;
     $arr=array();
     $arr2=array();
-    
-    $d="18:00";
-    $d=date("Y-m-d ").$d.":00";
-    $d=date("Y-m-d H:i:s", strtotime(date($d)));
-    
-    
-    $f="19:00";
-    $f=date("Y-m-d ").$f.":00";
-    $f=date("Y-m-d H:i:s", strtotime(date($f)));
-    
-    
-    while ($debut <= $fin) {
-         $arr[]=$debut;
-    
-         $debut=date("Y-m-d H:i:s", (strtotime(date($debut)) + $pas));
-    
+    $items=array();
+    $arr4=array();
+    $jour=date("Y-m-d");
+    $Today_appointments=Appointment::where('ActiveType',"1")->whereJour($jour)->get();
+    while ($debut < $fin )
+    {
+      $arr[]=$debut;  
+      $debut=date("Y-m-d H:i:s", (strtotime(date($debut)) + $pas));
+          }
+          if (count($Today_appointments)>0) {
+            foreach ($Today_appointments as $appointment ) {  
+    for ($i=0; $i <count($arr) ; $i++) { 
+    $d=date("Y-m-d H:i:s", strtotime($appointment->date." ".$appointment->debut.":00"));
+    $f=date("Y-m-d H:i:s", strtotime($appointment->date." ".$appointment->fin.":00"));
+    if ($arr[$i]>=$d && $arr[$i]<$f) {
+      $arr2[]=$arr[$i];
     }
-    
+    else{
+       $arr4[]= $arr[$i];}}
      
-    
-    
-    
-      foreach ($arr as $key ) { 
-      if ($d<=$key && $key<$f) {
-    
-    
-    
-      }
-      else{
-    
-        $arr2[]=$key;
-      }
-    
-    
-    
-    
+     
+     }} else {
+ 
+ 
+       for ($i=0; $i <count($arr) ; $i++) { 
        
-    
-    } 
-        return view("test")->with('arr2',$arr2);
+            $arr4[]= $arr[$i];}
+          }
+foreach ($arr4 as $k ) {
+    if (!in_array($k, $items)&&!in_array($k, $arr2) ) {
+   $items[]=$k;}}
+   $var=1;
 
-    } }
 
 
+   $type=Type::find($type);
+   return view("test")->with('items',$items)
+   ->with('var',$var)
+   ->with('type',$type->temps)
+   ->with('jour',$jour)
+   ->with('username',$username)
+   ->with('Cid',$Cid);
 
-
+    }
 
 
 
 
 
   
+   public function tomorrow($type,$username,$Cid)
+   {
+$types=Type::whereId($type)->first();
+date_default_timezone_set("Africa/Algiers");
+$date=date("l");
+    $date=date("l", strtotime($date. ' + 1 day'));
 
 
-/* 
-    $days = array();
-    $days[]="more";
-
-
-
-    for ($i=1; $i <=10 ; $i++) { 
-      $array[]=$i;
-    }
-    $total=count($array)/10;
-    $dd=ceil($total);
-    $a=0;
-    $b=$a+10;
-    for ($i=1; $i <$dd+1 ; $i++) { 
-    ${"array".$i}=array(); 
-    while ($a<$b && $a<count($days) ) { 
-      ${"array".$i}[]=$days[$a];
-    $a++;
-    }
-    $b=$a+10;
+if ($date=='Friday') {
+    $debut="09:00";
+    $fin="22:00";
+ }elseif($date=='Saturday'){
+     $debut="09:00";
+     $fin="22:00";
+ }else{
+     $debut="16:00";
+     $fin="22:00";
  }
 
+    $debut=date("Y-m-d ").$debut.":00";
+    $debut=date("Y-m-d H:i:s", strtotime(date($debut)));  
+    $fin=date("Y-m-d ").$fin.":00";
+    $fin=date("Y-m-d H:i:s", strtotime(date($fin)));
+    $pas=60*$types->temps;
+    $arr=array();
+    $arr2=array();
+    $items=array();
+    $arr4=array();
+    $jour=date("Y-m-d");
+    $tomorrow=date('Y-m-d', strtotime($jour. ' + 1 day'));
+    $jour=$tomorrow;
+    $Tomorrow_appointments=Appointment::where('ActiveType',"1")->whereJour($tomorrow)->get();
+    while ($debut < $fin )
+    {
+      $arr[]=$debut;  
+      $debut=date("Y-m-d H:i:s", (strtotime(date($debut)) + $pas));
 
-foreach (${"array"."1"} as $key ) {
-echo $key;}
+          }
+          
+          if (count($Tomorrow_appointments)>0) {
+            foreach ($Tomorrow_appointments as $appointment ) {  
+    for ($i=0; $i <count($arr) ; $i++) { 
+    $d=date("Y-m-d H:i:s", strtotime($appointment->date." ".$appointment->debut.":00"));
+    $f=date("Y-m-d H:i:s", strtotime($appointment->date." ".$appointment->fin.":00"));
+    if ($arr[$i]>=$d && $arr[$i]<$f) {
+      $arr2[]=$arr[$i];
+    }
+    else{
+       $arr4[]= $arr[$i];}}
+     
+     
+     }} else {
+ 
+ 
+       for ($i=0; $i <count($arr) ; $i++) { 
+       
+            $arr4[]= $arr[$i];}
+          }
+foreach ($arr4 as $k ) {
+
+
+    if (!in_array($k, $items)&&!in_array($k, $arr2) ) {
+   $items[]=$k;}}
+   $var=2;
+   $type=Type::find($type);
+   return view("test")->with('items',$items)
+   ->with('var',$var)
+   ->with('type',$type->temps)
+   ->with('jour',$jour)
+   ->with('username',$username)
+   ->with('Cid',$Cid);  }
 
 
 
-dd(); */
 
 
 
 
+  public function afterTomorrow($type,$username,$Cid)
+   
+  {
+$types=Type::whereId($type)->first();
+date_default_timezone_set("Africa/Algiers");
+$date=date("l");
+    $date=date("l", strtotime($date. ' + 2 day'));
+    if ($date=='Friday') {
+   $debut="09:00";
+   $fin="22:00";
+}elseif($date=='Saturday'){
+    $debut="09:00";
+    $fin="22:00";
+}else{
+    $debut="16:00";
+    $fin="22:00";
+}
+   $debut=date("Y-m-d ").$debut.":00";
+   $debut=date("Y-m-d H:i:s", strtotime(date($debut)));  
+   $fin=date("Y-m-d ").$fin.":00";
+   $fin=date("Y-m-d H:i:s", strtotime(date($fin)));
+   $pas=60*$types->temps;
+   $arr=array();
+   $arr2=array();
+   $items=array();
+   $arr4=array();
+   $jour=date("Y-m-d");
+   $afterTommorow=date('Y-m-d', strtotime($jour. ' + 2 day'));
+   $jour=$afterTommorow;
+   $afterTommorow=Appointment::where('ActiveType',"1")->whereJour($afterTommorow)->get();
+   while ($debut < $fin )
+   {
+     $arr[]=$debut;  
+     $debut=date("Y-m-d H:i:s", (strtotime(date($debut)) + $pas));
+         }
+
+         if (count($afterTommorow)>0) {
+           foreach ($afterTommorow as $appointment ) {  
+   for ($i=0; $i <count($arr) ; $i++) { 
+   $d=date("Y-m-d H:i:s", strtotime($appointment->date." ".$appointment->debut.":00"));
+   $f=date("Y-m-d H:i:s", strtotime($appointment->date." ".$appointment->fin.":00"));
+   if ($arr[$i]>=$d && $arr[$i]<$f) {
+     $arr2[]=$arr[$i];
+   }
+   else{
+      $arr4[]= $arr[$i];}}
+    
+    
+    }} else {
+
+
+      for ($i=0; $i <count($arr) ; $i++) { 
+      
+           $arr4[]= $arr[$i];}
+         }
+         
+ 
+foreach ($arr4 as $k ) {
+   if (!in_array($k, $items)&&!in_array($k, $arr2) ) {
+  $items[]=$k;}}
+  $var=3;
+  $type=Type::find($type);
+  return view("test")->with('items',$items)
+  ->with('var',$var)
+  ->with('type',$type->temps)
+  ->with('jour',$jour)
+  ->with('username',$username)
+  ->with('Cid',$Cid);}
 
 
 
+}
 
 
 
