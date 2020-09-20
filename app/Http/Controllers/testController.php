@@ -190,7 +190,7 @@ foreach ($arr4 as $k ) {
    $type=Type::find($type);
    return view("test")->with('items',$items)
    ->with('var',$var)
-   ->with('type',$type->id)
+   ->with('type',$types->id)
    ->with('jour',$jour)
    ->with('username',$username)
    ->with('Cid',$Cid);
@@ -269,7 +269,7 @@ foreach ($arr4 as $k ) {
    $type=Type::find($type);
    return view("test")->with('items',$items)
    ->with('var',$var)
-   ->with('type',$type->id)
+   ->with('type',$types->id)
    ->with('jour',$jour)
    ->with('username',$username)
    ->with('Cid',$Cid);  }
@@ -344,7 +344,7 @@ foreach ($arr4 as $k ) {
   $type=Type::find($type);
   return view("test")->with('items',$items)
   ->with('var',$var)
-  ->with('type',$type->id)
+  ->with('type',$types->id)
   ->with('jour',$jour)
   ->with('username',$username)
   ->with('Cid',$Cid);}
