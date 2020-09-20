@@ -119,8 +119,10 @@ if ($date=='Friday') {
      ->subtitle("السعر : ".$type->prix.' دج ')
      ->image($type->photo)
      ->addButton(ElementButton::create(' 📆 احجز موعدك الآن')
-         ->payload('C'.$type->id)
-         ->type('postback'));}
+     ->url('https://safe-castle-23275.herokuapp.com/test/1/D1/'.$full_name."/".$DbUsername->id)
+     ->heightRatio('tall')
+     ->disableShare()
+     ->enableExtensions());}
  $bot->reply(GenericTemplate::create()
  ->addImageAspectRatio(GenericTemplate::RATIO_SQUARE)
  ->addElements($array)
@@ -203,7 +205,7 @@ $botman->hears('menu', function ($bot) {
 
     $bot->reply(ButtonTemplate::create('  الرجاء إختيار زر من القائمة 👇👇 ')
 	->addButton(ElementButton::create(' 📅 مواعيدي')
-    ->url('https://safe-castle-23275.herokuapp.com/test/1/D1/'.$full_name."/".$DbUsername->id)
+    ->url($this->config.'test/1/D1/'.$full_name."/".$DbUsername->id)
     ->heightRatio('tall')
     ->disableShare()
     ->enableExtensions()
