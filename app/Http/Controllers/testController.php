@@ -58,10 +58,15 @@ $addApp->fin=$fin;
 $addApp->client_id=$Cid;
 
 $addApp->save();
-echo"done";
+$client=Client::find($Cid);
 
 
-dd();
+
+
+$config=Config::get('app.url');
+
+
+
       $messageData = [
           "recipient" => [
               "id" => $id,
@@ -76,8 +81,8 @@ dd();
                 "buttons"=>[
                   [
                     "type"=>"web_url",
-                    "url"=>"https://www.messenger.com",
-                    "title"=>"Visit Messenger"
+                    "url"=>"$config.'/client/'.$client->slug",
+                    "title"=>"تصفح  مواعيدي"
                   ],
                  
                   
