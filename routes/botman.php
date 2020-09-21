@@ -17,7 +17,6 @@ use BotMan\Drivers\Facebook\Extensions\GenericTemplate;
 use BotMan\Drivers\Facebook\Extensions\MediaAttachmentElement;
 
 $this->config=Config::get('app.url');
-$this->config="https://97c1d5a3eb29.ngrok.io";
 $botman = resolve('botman');
 
 
@@ -56,9 +55,9 @@ $bot->typesAndWaits(2);
 	    ->type('postback')
 	    ->payload('GotoDis')
 	)
-	->addButton(ElementButton::create(' 🗒 تصفح مواعيدي ')
-	    ->url($this->config.'/client/'.$DbUsername->slug)
-	)
+	->addButton(ElementButton::create(' 👨‍🏫  كيف أحجز موعد    ')
+    ->type('postback')
+    ->payload('steps')	)
 );
 });
   
@@ -73,10 +72,7 @@ $botman->hears('rdv([0-9]+)', function($bot,$number) {
 // Access last name
 $lastname = $user->getLastname();
 $full_name=$firstname.'-'.$lastname;
-
 $DbUsername=Client::whereFacebook($full_name)->first();
-
-
 
 
  $types=Type::all();
@@ -147,7 +143,6 @@ $complet_message="  أنا آسف صديقي 😕  ".$full_name."\n"." كل ال
 
 $botman->hears('GoToDis', function ( $bot) {
 
-
     $user = $bot->getUser();
     $facebook_id = $user->getId();
     // Access last name
@@ -155,21 +150,27 @@ $botman->hears('GoToDis', function ( $bot) {
 // Access last name
 $lastname = $user->getLastname();
 $full_name=$firstname.'-'.$lastname;
-$OneApp=Appointment::where('facebook',$full_name)
-->where('ActiveType','1')->count();
-$DbUsername=Client::whereFacebook($full_name)->first();
-
-if ($OneApp>0) {
-    $bot->typesAndWaits(2);
-
-    $bot->reply(ButtonTemplate::create(' عذرا صديقي 😕 '.$full_name ."\n"." لقد حجزت موعد من قبل لا يمكنك حجز أكثر من موعد في نفس اليوم ")
-    ->addButton(ElementButton::create('🗒 تصفح مواعيدي  ')
-    ->url($this->config.'/client/'.$DbUsername->slug)
-
-));
-}
+    $DbUsername=Client::whereFacebook($full_name)->first();
+    $OneApp=Appointment::where('facebook',$full_name)
+    ->where('ActiveType','1')->count();
     
-else{
+    if ($OneApp>0) {
+        $bot->typesAndWaits(2);
+    
+        $bot->reply(ButtonTemplate::create(' عذرا صديقي 😕 '.$full_name ."\n"." لقد حجزت موعد من قبل لا يمكنك حجز أكثر من موعد في نفس اليوم ")
+        ->addButton(ElementButton::create('🗒 تصفح مواعيدي  ')
+        ->url($this->config.'/client/'.$DbUsername->slug)
+    
+        )
+        
+        );}
+
+
+
+        else{
+
+
+
     $bot->typesAndWaits(2);
 
     $bot->reply(Question::create('  من فضلك إختر يوم موعدك  👇👇')->addButtons([
@@ -178,8 +179,8 @@ else{
     Button::create('🕐 اليوم')->value('rdv1'),
 
 
-    
 
+    
 
     ]));}
 });
@@ -218,7 +219,7 @@ $botman->hears('menu', function ($bot) {
     ->enableExtensions()
 
 	)
-	->addButton(ElementButton::create(' 🎁 نقاطي')
+	->addButton(ElementButton::create(' 🎁 رصيدي')
     ->url($this->config.'/client/'.$DbUsername->slug)
     ->heightRatio('tall')
     ->disableShare()
@@ -228,6 +229,8 @@ $botman->hears('menu', function ($bot) {
 );
 
   });
+
+
 
 
 
@@ -243,7 +246,7 @@ $botman->hears('menu', function ($bot) {
     $bot->typesAndWaits(1);
 
     $bot->reply('بعد قيامك بهاته المراحل  تكون قد أتممت عملية الحجز  ');
-    $bot->reply(' يمكنك كذلك معرفة الزمن المتبقي لموعدك بالضغط على زر  📆 نقاطي 🎁  |  مواعيدي من القائمة  ');
+    $bot->reply(' يمكنك كذلك معرفة الزمن المتبقي لموعدك بالضغط على زر  📆 رصيدي 🎁  |  مواعيدي من القائمة  ');
     $bot->typesAndWaits(1);
     
     $bot->reply(ButtonTemplate::create('يمكنك الآن حجز موعدك  بكل سهولة  😍 ')
@@ -259,6 +262,7 @@ $botman->hears('menu', function ($bot) {
     
     
     });
+
   $botman->fallback(function($bot) {
     $bot->reply(ButtonTemplate::create('عذرًا ، لم أستطع فهمك 😕 '."\n". 'هذه قائمة بالأوامر التي أفهمها:')
 	->addButton(ElementButton::create('🛍 احجز موعد ')

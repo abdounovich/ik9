@@ -29,6 +29,7 @@ if (!$appointment) {
 }
 else{
              $TheDi=$appointment->jour." ".$appointment->debut.":00";
+             echo $TheDi;dd();
 
             // 2012-01-31 00:00:00
             $aaa=new Carbon($TheDi);
